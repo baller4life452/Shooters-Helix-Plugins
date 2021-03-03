@@ -31,16 +31,22 @@ PLUGIN.npcEffected = {
 		"npc_apcdriver",
 }
 
+PLUGIN.AllowedWeapons = {
+    ['ix_hands'] = true,
+	['ix_keys'] = true,
+	['weapon_physgun'] = true,
+	['gmod_tool'] = true
+}
 
 --[[
 Doesn't matter whats the item just make to have these in some kind of outfit file
  
 function ITEM:OnEquipped()
-    self.player:SetNetVar("isRebel",true)
+    self.player:SetNWBool("isRebel",true)
 end
  
 function ITEM:OnUnequipped()
-    self.player:SetNetVar("isRebel",false)
+    self.player:SetNWBool("isRebel",false)
 end
 
 --]]
@@ -50,7 +56,7 @@ if (SERVER) then
         if(ix.config.Get("npcrelationship", false)) then
             local char = client:GetCharacter()
             if char then
-                if !char:IsCombine() and client:GetActiveWeapon():GetClass() != "ix_hands" or client:GetActiveWeapon():GetClass() != "ix_keys" or client:GetNetVar("isRebel") then 
+                if !char:IsCombine() and self.AllowedWeapons[client:GetActiveWeapon():GetClass()] == nil or client:GetNWBool("isRebel") then 
                     for _, NPCt in pairs( ents.FindByClass("npc_*")) do
                         for k, v in pairs(self.npcEffected) do
                             if (NPCt:GetClass() == v) then
@@ -59,7 +65,7 @@ if (SERVER) then
                         end
                     end
                 end
-                if client:GetActiveWeapon():GetClass() == "ix_hands" or client:GetActiveWeapon():GetClass() == "ix_keys" or char:IsCombine() then
+                if self.AllowedWeapons[client:GetActiveWeapon():GetClass()] != nil or char:IsCombine() then
                     for _, NPCt in pairs( ents.FindByClass("npc_*")) do
                         for k, v in pairs(self.npcEffected) do
                             if (NPCt:GetClass() == v) then
