@@ -1,0 +1,12 @@
+ITEM.name = "THE MYTHICAL SKULL" -- the name of the item
+ITEM.description = "A skull which you can hear incantations from." -- a general discription of the item for when players mouse over the item.
+ITEM.category = "Constructable" -- The category this item falls under, this is mainly used for venders and other items
+ITEM.model = "models/props_junk/cardboard_box002a.mdl" -- the model of the item when dropped and when inside the  
+ITEM.prop = "models/gibs/agibs.mdl" -- the model of the item that you want placed
+ITEM.offset = Vector(0,0,6) -- the offset of the item from when it was placed (in the event it spawns in the ground.
+ITEM.maxdistance = 200 -- the max distance from the player the item can be to place it
+ITEM.mindistance = 80 -- the min distance from the player the item can be to place it ( to prevent people from getting stuck)
+ITEM.defaultturn = 90 -- the spin of the item, in the event you want the item to face another way when placed 
+ITEM.time = 2 -- how long it takes for the player to place the item
+ITEM.width = 1 -- how wide the item is in the inv
+ITEM.height = 1 -- how tall the item is in the inv

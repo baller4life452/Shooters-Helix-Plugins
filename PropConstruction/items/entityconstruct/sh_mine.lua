@@ -1,0 +1,12 @@
+ITEM.name = "Placeable Mine"
+ITEM.description = "A combine mine"
+ITEM.category = "Constructable"
+ITEM.model = "models/Items/item_item_crate.mdl"
+ITEM.entitys = "combine_mine"
+ITEM.offset = Vector(0,0,10)
+ITEM.maxdistance = 200
+ITEM.mindistance = 40
+ITEM.defaultturn = 0
+ITEM.time = 2
+ITEM.width = 2
+ITEM.height = 2
