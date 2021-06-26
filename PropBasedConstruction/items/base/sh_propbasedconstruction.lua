@@ -7,6 +7,9 @@ ITEM.time = 5
 ITEM.width = 2
 ITEM.height = 2
 
+function ITEM:GetModel()
+    return ( (self.invID == 0 or not self.invID) and self.model ) or self.prop
+end
 
 ITEM.functions.Place = {
 	name = "Place",
