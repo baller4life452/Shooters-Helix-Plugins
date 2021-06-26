@@ -1,6 +1,6 @@
 PLUGIN.name = "Improved Constructable Props"
-PLUGIN.author = "Shooter"
-PLUGIN.description = "Adds the ability to construct props, Better then the older verison"
+PLUGIN.author = "SHOOTER#5269"
+PLUGIN.description = "Adds the ability to construct props and entities"
 
 function PLUGIN:LoadData()
 	self:LoadConstructionProp()
@@ -105,22 +105,28 @@ if (SERVER) then
 			end
 		end
 		if key == IN_RELOAD and IsValid(ply) and ply:Alive() and IsValid(ply:GetActiveWeapon()) and ply:GetActiveWeapon():GetClass() == "ix_hands" and ply:GetEyeTrace().HitPos:Distance(ply:GetPos()) <= 250 then
-			ply:SetNWString( "ConstructablePropModel", "nul")
-			ply.propConstructHolo:Remove()
-			ply:SetNWBool("ConstructablePropPlacing", false)
+			if ply:GetNWBool("ConstructablePropPlacing") then
+				ply:SetNWString( "ConstructablePropModel", "nul")
+				ply.propConstructHolo:Remove()
+				ply:SetNWBool("ConstructablePropPlacing", false)
+			end
 		end
 		if key == IN_ATTACK and IsValid(ply) and ply:Alive() and IsValid(ply:GetActiveWeapon()) and ply:GetActiveWeapon():GetClass() == "ix_hands" then
-			if ply:GetNWInt( "ConstructablePropRotation" ) < 180 then
-				ply:SetNWInt( "ConstructablePropRotation", ply:GetNWInt( "ConstructablePropRotation" ) + 15)
-			else
-				ply:SetNWInt( "ConstructablePropRotation", 0 )
+			if ply:GetNWBool("ConstructablePropPlacing") then
+				if ply:GetNWInt( "ConstructablePropRotation" ) < 180 then
+					ply:SetNWInt( "ConstructablePropRotation", ply:GetNWInt( "ConstructablePropRotation" ) + 15)
+				else
+					ply:SetNWInt( "ConstructablePropRotation", 0 )
+				end
 			end
 		end
 		if key == IN_ATTACK2 and IsValid(ply) and ply:Alive() and IsValid(ply:GetActiveWeapon()) and ply:GetActiveWeapon():GetClass() == "ix_hands" then
-			if ply:GetNWInt( "ConstructablePropRotationX" ) < 180 then
-				ply:SetNWInt( "ConstructablePropRotationX", ply:GetNWInt( "ConstructablePropRotationX" ) + 15)
-			else
-				ply:SetNWInt( "ConstructablePropRotationX", 0 )
+			if ply:GetNWBool("ConstructablePropPlacing") then
+				if ply:GetNWInt( "ConstructablePropRotationX" ) < 180 then
+					ply:SetNWInt( "ConstructablePropRotationX", ply:GetNWInt( "ConstructablePropRotationX" ) + 15)
+				else
+					ply:SetNWInt( "ConstructablePropRotationX", 0 )
+				end
 			end
 		end
 	end
