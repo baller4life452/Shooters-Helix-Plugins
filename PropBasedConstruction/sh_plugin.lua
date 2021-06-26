@@ -70,6 +70,7 @@ if (SERVER) then
 						ply.propConstructHolo:SetPos(tr.HitPos - tr.HitNormal * ply.propConstructHolo:OBBMins().z)
 						ply.propConstructHolo:SetColor(Color(0,204,204, 150))
 						ply.propConstructHolo:SetModel(ply:GetNWString( "ConstructablePropModel"))
+						ply.propConstructHolo:SetMaterial("models/shiny")
 						ply.propConstructHolo:SetCollisionGroup(COLLISION_GROUP_IN_VEHICLE)
 						ply.propConstructHolo:SetRenderMode(RENDERMODE_TRANSALPHA)
 						ply.propConstructHolo:Spawn()
