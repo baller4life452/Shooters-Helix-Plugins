@@ -1,7 +1,7 @@
 local PLUGIN = PLUGIN
 
 PLUGIN.name = "NPC Relationship"
-PLUGIN.author = "SHOOTER"
+PLUGIN.author = "Shooter#5269"
 PLUGIN.description = "Makes it so NPC CPs don't shoot at player CPs, and NPCs don't shoot at players with nothing."
 
 ix.config.Add("npcrelationship", true, "Weather or not on NPC have relations with Players.", nil, {
