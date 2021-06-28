@@ -35,6 +35,7 @@ if (SERVER) then
 			prop:SetSolid(SOLID_VPHYSICS)
 			prop:SetAngles(v.angles)
 			prop:Spawn()
+			prop:GetPhysicsObject():EnableMotion( false )
 		end
 	end
 	
@@ -99,6 +100,7 @@ if (SERVER) then
 				fortification:SetMoveType(MOVETYPE_VPHYSICS)
 				fortification:SetSolid(SOLID_VPHYSICS)
 				fortification:Spawn()
+				fortification:GetPhysicsObject():EnableMotion( false )
 				ply.propConstructHolo:Remove()
 				ply:GetCharacter():GetInventory():Remove(ply:GetNWInt( "ConstructablePropID" ))
 				ply:SetNWBool("ConstructablePropPlacing", false)
