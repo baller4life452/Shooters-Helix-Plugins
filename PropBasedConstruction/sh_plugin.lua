@@ -11,8 +11,6 @@ function PLUGIN:SaveData()
 end
 
 if (SERVER) then
-	
-	
 	function PLUGIN:SaveConstructionProp()
 		local data = {}
 		for _, v in ipairs(ents.FindByClass("prop_physics")) do
