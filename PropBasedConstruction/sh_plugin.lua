@@ -15,7 +15,7 @@ if (SERVER) then
 	
 	function PLUGIN:SaveConstructionProp()
 		local data = {}
-		for _, v in ipairs(ents.FindByClass("prop_dynamic")) do
+		for _, v in ipairs(ents.FindByClass("prop_physics")) do
 			data[#data + 1] = {
 				pos = v:GetPos(),
 				angles = v:GetAngles(),
@@ -27,7 +27,7 @@ if (SERVER) then
 
 	function PLUGIN:LoadConstructionProp()
 		for _, v in ipairs(ix.data.Get("ConstructionProp") or {}) do
-			local prop = ents.Create( "prop_dynamic" )
+			local prop = ents.Create( "prop_physics" )
 
 			prop:SetModel( v.model )
 			prop:SetPos( v.pos )
@@ -64,7 +64,7 @@ if (SERVER) then
 		if ply:GetNWBool("ConstructablePropPlacing", false) then
 			if !ply:Crouching() and IsValid(ply) and ply:Alive() and IsValid(wep) and wep:GetClass() == "ix_hands" and pos:Distance(tr.HitPos) <= 250 then
 				if not IsValid(ply.propConstructHolo) then
-					ply.propConstructHolo = ents.Create("prop_dynamic")
+					ply.propConstructHolo = ents.Create("prop_physics")
 					if IsValid(ply.propConstructHolo) then
 						ply.propConstructHolo:SetAngles(Angle(0 - ply:GetNWInt( "ConstructablePropRotation" ), ply:EyeAngles().y - 180, 0 - ply:GetNWInt( "ConstructablePropRotationX" ) ))
 						ply.propConstructHolo:SetPos(tr.HitPos - tr.HitNormal * ply.propConstructHolo:OBBMins().z)
@@ -92,7 +92,7 @@ if (SERVER) then
 	function PLUGIN:KeyPress(ply, key)
 		if key == IN_USE and IsValid(ply) and ply:Alive() and IsValid(ply:GetActiveWeapon()) and ply:GetActiveWeapon():GetClass() == "ix_hands" and ply:GetEyeTrace().HitPos:Distance(ply:GetPos()) <= 250 then
 			if ply:GetNWBool("ConstructablePropPlacing") then
-				local fortification = ents.Create("prop_dynamic")
+				local fortification = ents.Create("prop_physics")
 				fortification:SetModel(ply:GetNWString( "ConstructablePropModel"))
 				fortification:SetAngles(Angle(0 - ply:GetNWInt( "ConstructablePropRotation" ), ply:EyeAngles().y - 180, 0 - ply:GetNWInt( "ConstructablePropRotationX" )))
 				fortification:SetPos(ply:GetEyeTrace().HitPos - ply:GetEyeTrace().HitNormal * fortification:OBBMins().z)
