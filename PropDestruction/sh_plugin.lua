@@ -44,7 +44,7 @@ if (SERVER) then
 		
 		function PLUGIN:EntityTakeDamage(target, dmginfo) 
 			if target:GetClass() == "prop_physics" then
-				if dmginfo:GetAttacker():GetActiveWeapon():GetClass() != "ix_hands" then
+				if dmginfo:GetInflictor():GetClass() != "ix_hands" then
 					target:SetHealth(target:Health() - dmginfo:GetDamage())
 					if target:Health() <= 0 then
 						target:EmitSound("physics/metal/metal_box_break" .. math.random(1, 2) .. ".wav")
