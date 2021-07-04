@@ -14,11 +14,13 @@ if (SERVER) then
 	function PLUGIN:SaveConstructionProp()
 		local data = {}
 		for _, v in ipairs(ents.FindByClass("prop_physics")) do
-			data[#data + 1] = {
-				pos = v:GetPos(),
-				angles = v:GetAngles(),
-				model = v:GetModel(),
-			}
+			if v.isConstruct then
+				data[#data + 1] = {
+					pos = v:GetPos(),
+					angles = v:GetAngles(),
+					model = v:GetModel(),
+				}
+			end
 		end
 		ix.data.Set("ConstructionProp", data)
 	end
@@ -34,6 +36,7 @@ if (SERVER) then
 			prop:SetAngles(v.angles)
 			prop:Spawn()
 			prop:GetPhysicsObject():EnableMotion( false )
+			prop.isConstruct = true
 		end
 	end
 	
@@ -99,6 +102,7 @@ if (SERVER) then
 				fortification:SetSolid(SOLID_VPHYSICS)
 				fortification:Spawn()
 				fortification:GetPhysicsObject():EnableMotion( false )
+				fortification.isConstruct = true
 				ply.propConstructHolo:Remove()
 				ply:GetCharacter():GetInventory():Remove(ply:GetNWInt( "ConstructablePropID" ))
 				ply:SetNWBool("ConstructablePropPlacing", false)
