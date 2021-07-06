@@ -57,28 +57,28 @@ if (SERVER) then
 end
 
 if (CLIENT) then
-	if(ix.config.Get("propdestructionhud", false)) then
-		local w, h = ScrW(), ScrH()
-		surface.CreateFont( "PropDestructionFont", {
-		font = "Arial",
-		extended = false,
-		size = 20 * h/700,
-		weight = 500,
-		blursize = 0,
-		scanlines = 0,
-		antialias = true,
-		underline = false,
-		italic = false,
-		strikeout = false,
-		symbol = false,
-		rotary = false,
-		shadow = false,
-		additive = false,
-		outline = true,
-		} )
+	local w, h = ScrW(), ScrH()
+	surface.CreateFont( "PropDestructionFont", {
+	font = "Arial",
+	extended = false,
+	size = 20 * h/700,
+	weight = 500,
+	blursize = 0,
+	scanlines = 0,
+	antialias = true,
+	underline = false,
+	italic = false,
+	strikeout = false,
+	symbol = false,
+	rotary = false,
+	shadow = false,
+	additive = false,
+	outline = true,
+	} )
 		
-		function PLUGIN:HUDPaint()
-			local tr = LocalPlayer():GetEyeTraceNoCursor()
+	function PLUGIN:HUDPaint()
+		if(ix.config.Get("propdestructionhud", false)) then
+		local tr = LocalPlayer():GetEyeTraceNoCursor()
 			if IsValid(tr.Entity) and tr.HitPos:DistToSqr(LocalPlayer():EyePos()) < 22500 and tr.Entity:GetClass() == "prop_physics" then
 				local ent = tr.Entity
 
