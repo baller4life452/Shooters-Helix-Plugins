@@ -2,7 +2,7 @@ PLUGIN.title = "In-Development Hud"
 PLUGIN.author = "Shooter#5269"
 PLUGIN.description = "Implements a small hud for players to see at all times, admins will have access to a dev varient as well."
 
-PLUGIN.servername = "Delta"
+PLUGIN.servername = "Generic Networks"
 PLUGIN.updatetext = "Core Update - 1"
 
 ix.config.Add("DevHud", true, "Weather or not players see the hud at all.", nil, {
