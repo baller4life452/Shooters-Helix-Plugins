@@ -62,32 +62,43 @@ function PLUGIN:CalcView(ply, origin, angles, fov)
 
 	
 
-        ply:InvalidateBoneCache()
-        ply:SetupBones()
+    ply:InvalidateBoneCache()
+    ply:SetupBones()
 
-        local NeckboneID
-		local HeadboneID
+    local NeckboneID
+	local HeadboneID
 
-        for bone = 0, (ply:GetBoneCount() - 1) do
-            if ply:GetBoneName(bone):lower():find("neck") then
-                NeckboneID = bone
-                break
-            end
+	for bone = 0, (ply:GetBoneCount() - 1) do
+        if ply:GetBoneName(bone):lower():find("neck") then
+            NeckboneID = bone
+            break
         end
-		for bone = 0, (ply:GetBoneCount() - 1) do
-            if ply:GetBoneName(bone):lower():find("head") then
-                HeadboneID = bone
-                break
-            end
+    end
+	for bone = 0, (ply:GetBoneCount() - 1) do
+        if ply:GetBoneName(bone):lower():find("head") then
+            HeadboneID = bone
+            break
         end
+    end
 
-        if NeckboneID and HeadboneID then
-            ply:ManipulateBoneScale( NeckboneID, Vector(0.5, 0.5, 0.5))
-			ply:ManipulateBoneScale( HeadboneID, Vector(0, 0, 0))
-        end
-    
-
+    if NeckboneID and HeadboneID then
+		ply:ManipulateBoneScale( NeckboneID, Vector(0.5, 0.5, 0.5))
+		ply:ManipulateBoneScale( HeadboneID, Vector(0, 0, 0))
+    end
+		
+    local data = {}
+		data.start = ply:GetPos()
+		data.endpos = data.start + Vector( 0, 0, 100 )
+		data.filter = ply
+	local trace = util.TraceLine(data)
+	
     view.origin = head2.Pos + head2.Ang:Up() + Vector(0,0,2)
-
+	
+	if ply:Crouching() then
+		if math.sqrt(math.pow(ply:GetVelocity().x, 2 ) + math.pow(ply:GetVelocity().y, 2)) > 0 and trace.HitWorld then
+			view.origin = head2.Pos + head2.Ang:Up() + Vector(0,0,-16)
+		end
+	end
+	
     return view
 end
