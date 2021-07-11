@@ -137,7 +137,7 @@ if (SERVER) then
 	end
 	function PLUGIN:CanPlayerDropItem(client, item)
 		if client:GetNWBool("ConstructablePropPlacing", false) then
-			if item == client:GetNWInt( "ConstructablePropID" ) or item.isBag then
+			if item == client:GetNWInt( "ConstructablePropID" ) or client:GetCharacter():GetInventory():GetItemByID(item, false).isBag then
 			client.propConstructHolo:Remove()
 			return false
 			end
