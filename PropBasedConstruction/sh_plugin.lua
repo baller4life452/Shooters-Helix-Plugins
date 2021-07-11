@@ -104,7 +104,7 @@ if (SERVER) then
 				fortification:GetPhysicsObject():EnableMotion( false )
 				fortification.isConstruct = true
 				ply.propConstructHolo:Remove()
-				ply:GetCharacter():GetInventory():Remove(ply:GetNWInt( "ConstructablePropID" ))
+				ply:GetCharacter():GetInventory():GetItemByID(ply:GetNWInt( "ConstructablePropID" ), false):Remove(false, false)
 				ply:SetNWBool("ConstructablePropPlacing", false)
 				ply:SetNWString( "ConstructablePropModel", "nul")
 			end
@@ -172,11 +172,11 @@ if (CLIENT) then
 			draw.SimpleText("PLACING MODE ENABLED", "ConstructionPropFont", w/2, h/7, Color(255, 0, 0, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			
 			if lclient:GetActiveWeapon():GetClass() != "ix_hands" then
-				draw.SimpleText("Please have hands equipped to begin placing", "ConstructionPropFont", w/2, h/1.1, Color(255, 150, 150, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.SimpleText("Please have hands equipped to begin placing", "ConstructionPropFont", w/2, h/1.155, Color(255, 150, 150, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			end
 		
 			if lclient:GetActiveWeapon():GetClass() == "ix_hands" then
-				draw.SimpleText("LMB: Tilt Foward | RMB: Tilt Right | " .. string.upper(useBind) .. ": Place | " .. string.upper(reloadBind) .. ": Exit Placing", "ConstructionPropFont", w/2, h/1.1, Color(255, 255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.SimpleText("LMB: Tilt Foward | RMB: Tilt Right | " .. string.upper(useBind) .. ": Place | " .. string.upper(reloadBind) .. ": Exit Placing", "ConstructionPropFont", w/2, h/1.155, Color(255, 255, 255, 255), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			end
 		end
 	end
