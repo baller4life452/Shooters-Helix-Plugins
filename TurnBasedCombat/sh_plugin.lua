@@ -13,7 +13,7 @@ Known Bugs:
 
 Notes: 
 
-- If I get more freetime/plan on reworking this plugin undo the massive think hook, people will somehow dislike my use of it.
+- If I get more freetime/plan on reworking this plugin undo the massive think hook, people will dislike my use of it. i'm aware think hooks have a massive hit to preformance.
 --]]
 
 
