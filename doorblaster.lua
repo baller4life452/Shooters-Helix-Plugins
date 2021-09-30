@@ -34,7 +34,6 @@ if (SERVER) then
 				if target:GetClass() == "prop_door_rotating" and (target.canbeshot == nil or target.canbeshot == true) and IsValid(dmginfo:GetInflictor()) and dmginfo:IsBulletDamage() then
 					if dmginfo:GetInflictor():GetPos():Distance( target:GetPos() ) <= ix.config.Get("Range", 150) then
 						
-						print(self.blastableweapons[dmginfo:GetAttacker():GetActiveWeapon():GetClass()])
 						local matrix = target:GetBoneMatrix(0)
 						local originpos = matrix:GetTranslation()
 						local hindge1 = originpos + (target:GetUp() * 34)
@@ -68,6 +67,7 @@ if (SERVER) then
 							Door:Spawn()
 							Door:EmitSound( "/physics/wood/wood_crate_break"..math.random(1, 4)..".wav" , 150, 50, 1)
 							Door:GetPhysicsObject():ApplyForceCenter( Door:GetForward() * 1000 )
+							target.canbeshot = false
 							timer.Simple(ix.config.Get("Respawn Timer", 60), function()
 								target:SetCollisionGroup( 0 )
 								target:SetRenderMode( 0 )
@@ -75,12 +75,13 @@ if (SERVER) then
 								target.bHindge1 = false
 								if (Door) then
 									Door:Remove()
+									target.canbeshot = true
 								end
 							end)
 						
 						
 						-- shooting lock
-						else distance <= ix.config.Get("Shot Distance", 3) then
+						elseif distance <= ix.config.Get("Shot Distance", 3) then
 							target:Fire("setspeed", 350)
 							target:Fire("unlock")
 							target:Fire("openawayfrom", dmginfo:GetInflictor():UniqueID()..CurTime())
@@ -99,7 +100,7 @@ if (SERVER) then
 							timer.Simple(2, function()
 								target.canbeshot = true
 							end)
-						end
+						
 
 						-- shooting hindges
 						elseif (dampos:Distance(hindge1) <= ix.config.Get("Shot Distance", 3)*1.5) then
@@ -133,6 +134,7 @@ if (SERVER) then
 							target:SetCollisionGroup( 20 )
 							target:SetRenderMode( 10 )
 							Door:Spawn()
+							target.canbeshot = false
 							timer.Simple(ix.config.Get("Respawn Timer", 60), function()
 								target:SetCollisionGroup( 0 )
 								target:SetRenderMode( 0 )
@@ -140,9 +142,9 @@ if (SERVER) then
 								target.bHindge1 = false
 								if (Door) then
 									Door:Remove()
+									target.canbeshot = true
 								end
 							end)
-							
 						end
 					end
 				end
