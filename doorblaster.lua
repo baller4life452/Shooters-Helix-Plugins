@@ -29,7 +29,7 @@ PLUGIN.ignoredamage = {
 
 if (SERVER) then
 	function PLUGIN:EntityTakeDamage(target, dmginfo) 
-		if dmginfo:GetAttacker():IsPlayer() then
+		if IsValid(dmginfo:GetAttacker():IsPlayer()) and IsValid(dmginfo:GetInflictor()) then
 			if self.ignoredamage[dmginfo:GetAttacker():GetActiveWeapon()] == nil then
 				if target:GetClass() == "prop_door_rotating" and (target.canbeshot == nil or target.canbeshot == true) and IsValid(dmginfo:GetInflictor()) and dmginfo:IsBulletDamage() then
 					if dmginfo:GetInflictor():GetPos():Distance( target:GetPos() ) <= ix.config.Get("Range", 150) then
