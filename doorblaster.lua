@@ -77,10 +77,10 @@ if (SERVER) then
 									Door:Remove()
 								end
 							end)
-						end
+						
 						
 						-- shooting lock
-						if distance <= ix.config.Get("Shot Distance", 3) then
+						else distance <= ix.config.Get("Shot Distance", 3) then
 							target:Fire("setspeed", 350)
 							target:Fire("unlock")
 							target:Fire("openawayfrom", dmginfo:GetInflictor():UniqueID()..CurTime())
@@ -102,7 +102,7 @@ if (SERVER) then
 						end
 
 						-- shooting hindges
-						if (dampos:Distance(hindge1) <= ix.config.Get("Shot Distance", 3)*1.5) then
+						elseif (dampos:Distance(hindge1) <= ix.config.Get("Shot Distance", 3)*1.5) then
 							target.bHindge1 = true
 							local effect = EffectData()
 								effect:SetStart(hindge1)
