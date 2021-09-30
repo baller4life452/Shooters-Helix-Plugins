@@ -286,7 +286,6 @@ if (SERVER) then
 
 	function PLUGIN:Think()
 		timer.Simple( 0.01, function()
-			PrintTable(self.TotalCombats)
 			for k, v in pairs(ents.GetAll()) do
 				if v:IsNPC() then 
 					if v:IsMoving() then
