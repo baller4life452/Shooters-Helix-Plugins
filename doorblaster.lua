@@ -54,6 +54,7 @@ if (SERVER) then
 								effect:SetScale(2)
 							util.Effect("GlassImpact", effect, true, true)
 							local Door = ents.Create("prop_physics")
+							local TargetDoorsPos = target:GetPos()
 							Door:SetAngles(target:GetAngles())
 							Door:SetPos(target:GetPos() + target:GetUp())
 							Door:SetModel(target:GetModel())
@@ -68,11 +69,13 @@ if (SERVER) then
 							Door:EmitSound( "/physics/wood/wood_crate_break"..math.random(1, 4)..".wav" , 150, 50, 1)
 							Door:GetPhysicsObject():ApplyForceCenter( Door:GetForward() * 1000 )
 							target.canbeshot = false
+							target:SetPos(target:GetPos() + Vector(0,0,-1000))
 							timer.Simple(ix.config.Get("Respawn Timer", 60), function()
 								target:SetCollisionGroup( 0 )
 								target:SetRenderMode( 0 )
 								target.bHindge2 = false
 								target.bHindge1 = false
+								target:SetPos(target:GetPos() - Vector(0,0,-1000))
 								if (Door) then
 									Door:Remove()
 									target.canbeshot = true
@@ -135,11 +138,13 @@ if (SERVER) then
 							target:SetRenderMode( 10 )
 							Door:Spawn()
 							target.canbeshot = false
+							target:SetPos(target:GetPos() + Vector(0,0,-1000))
 							timer.Simple(ix.config.Get("Respawn Timer", 60), function()
 								target:SetCollisionGroup( 0 )
 								target:SetRenderMode( 0 )
 								target.bHindge2 = false
 								target.bHindge1 = false
+								target:SetPos(target:GetPos() - Vector(0,0,-1000))
 								if (Door) then
 									Door:Remove()
 									target.canbeshot = true
