@@ -51,12 +51,9 @@ end
 -- https://github.com/lunarmodules/luasocket/blob/master/src/url.lua
 local function escape(s) return (string.gsub(s, "([^A-Za-z0-9_])", function(c) return string.format("%%%02x", string.byte(c)) end)) end
 
---[[
-[Turn Youtube link to the RTS video into binary and put here]
-Thank you, https://gist.github.com/tomill/362661 for insperation
-0x68 0x74 0x74 0x70 0x73 0x3a 0x2f 0x2f 0x79 0x6f 0x75 0x74 0x75 0x2e 0x62 0x65 0x2f 0x64 0x51 0x77 0x34 0x77 0x39 0x57 0x67 0x58 0x63 0x51
---]]
 
+
+--Thank you, https://gist.github.com/tomill/362661 for insperation
 local function LanguageTranslator(speaker, receiver, query, chatType, rawText)
     local WritenLang  = string.Replace(ix.option.Get(speaker, "languageTranslator", "en      "), " ", "")
     local ReseaveLang = string.Replace(ix.option.Get(receiver, "languageTranslator", GetConVar("gmod_language")), " ", "")
