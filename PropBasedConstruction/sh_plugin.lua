@@ -94,19 +94,33 @@ if (SERVER) then
 	function PLUGIN:KeyPress(ply, key)
 		if key == IN_USE and IsValid(ply) and ply:Alive() and IsValid(ply:GetActiveWeapon()) and ply:GetActiveWeapon():GetClass() == "ix_hands" and ply:GetEyeTrace().HitPos:Distance(ply:GetPos()) <= 250 then
 			if ply:GetNWBool("ConstructablePropPlacing") then
-				local fortification = ents.Create("prop_physics")
-				fortification:SetModel(ply:GetNWString( "ConstructablePropModel"))
-				fortification:SetAngles(Angle(0 - ply:GetNWInt( "ConstructablePropRotation" ), ply:EyeAngles().y - 180, 0 - ply:GetNWInt( "ConstructablePropRotationX" )))
-				fortification:SetPos(ply:GetEyeTrace().HitPos - ply:GetEyeTrace().HitNormal * fortification:OBBMins().z)
-				fortification:SetMoveType(MOVETYPE_VPHYSICS)
-				fortification:SetSolid(SOLID_VPHYSICS)
-				fortification:Spawn()
-				fortification:GetPhysicsObject():EnableMotion( false )
-				fortification.isConstruct = true
-				ply.propConstructHolo:Remove()
-				ply:GetCharacter():GetInventory():GetItemByID(ply:GetNWInt( "ConstructablePropID" ), false):Remove(false, false)
-				ply:SetNWBool("ConstructablePropPlacing", false)
-				ply:SetNWString( "ConstructablePropModel", "nul")
+				for k, v in pairs(player.GetAll()) do
+					if ply.propConstructHolo:GetPos():Distance(v:GetPos()) <= ply.propConstructHolo:BoundingRadius()*4 then
+						ply.propConstructHolo:SetColor(Color(204,0,68, 150))
+						ply:SetNWBool("bCanPlace", false)
+						timer.Simple( 0.1, function() ply.propConstructHolo:SetColor(Color(0,204,204, 150)) end )
+						break 
+					else
+						ply.propConstructHolo:SetColor(Color(24,204,0, 150))
+						ply:SetNWBool("bCanPlace", true)
+					end
+				end
+				if ply:GetNWBool( "bCanPlace") then
+					local fortification = ents.Create("prop_physics")
+					fortification:SetModel(ply:GetNWString( "ConstructablePropModel"))
+					fortification:SetAngles(Angle(0 - ply:GetNWInt( "ConstructablePropRotation" ), ply:EyeAngles().y - 180, 0 - ply:GetNWInt( "ConstructablePropRotationX" )))
+					fortification:SetPos(ply:GetEyeTrace().HitPos - ply:GetEyeTrace().HitNormal * fortification:OBBMins().z)
+					fortification:SetMoveType(MOVETYPE_VPHYSICS)
+					fortification:SetSolid(SOLID_VPHYSICS)
+					fortification:Spawn()
+					fortification:GetPhysicsObject():EnableMotion( false )
+					fortification.isConstruct = true
+					ply.propConstructHolo:Remove()
+					ply:GetCharacter():GetInventory():GetItemByID(ply:GetNWInt( "ConstructablePropID" ), false):Remove(false, false)
+					ply:SetNWBool("bCanPlace", false)
+					ply:SetNWBool("ConstructablePropPlacing", false)
+					ply:SetNWString( "ConstructablePropModel", "nul")
+				end
 			end
 		end
 		if key == IN_RELOAD and IsValid(ply) and ply:Alive() and IsValid(ply:GetActiveWeapon()) and ply:GetActiveWeapon():GetClass() == "ix_hands" and ply:GetEyeTrace().HitPos:Distance(ply:GetPos()) <= 250 then
