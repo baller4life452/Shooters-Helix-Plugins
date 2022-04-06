@@ -2,7 +2,7 @@ PLUGIN.name = "RPG Balance"
 PLUGIN.author = "Shooter#5269"
 PLUGIN.description = "Have you ever wanted to give your players and RPG, but they keep using them irresponsible, unfair and/or overpowered skills? Well, this plugin will help you to balance your RPG."
 
-ix.config.Add("HoverColor", Color(255, 255, 255), "The Default Color For When hovering over an objetct.", nil, {category = PLUGIN.title})
+ix.config.Add("HoverColor", Color(255, 255, 255), "The Default Color For When hovering over an objetct.", nil, {category = PLUGIN.name})
 
 
 PLUGIN.IgnoredEntities = {

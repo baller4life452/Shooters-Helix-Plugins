@@ -1,4 +1,4 @@
-PLUGIN.title = "Arma Inspired Pointing System"
+PLUGIN.name = "Arma Inspired Pointing System"
 PLUGIN.author = "Shooter#5269"
 PLUGIN.description = "Adds the /point command, when you do all players close to you will see a cicle where you are looking"
     

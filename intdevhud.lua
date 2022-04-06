@@ -1,4 +1,4 @@
-PLUGIN.title = "In-Development Hud"
+PLUGIN.name = "In-Development Hud"
 PLUGIN.author = "Shooter#5269"
 PLUGIN.description = "Implements a small hud for players to see at all times, admins will have access to a dev varient as well."
 
@@ -6,7 +6,7 @@ PLUGIN.servername = "Generic Networks"
 PLUGIN.updatetext = "Core Update - 1"
 
 ix.config.Add("DevHud", true, "Weather or not players see the hud at all.", nil, {
-	category = "Dev Hud"
+	category = PLUGIN.name
 })	
 
 CAMI.RegisterPrivilege({
@@ -17,7 +17,7 @@ CAMI.RegisterPrivilege({
 
 ix.option.Add("Staff Hud", ix.type.bool, true, {
 	bNetworked = true,
-	category = "Dev Hud",
+	category = PLUGIN.name,
 	hidden = function()
 		return !CAMI.PlayerHasAccess(LocalPlayer(), "Helix - Staff Hud", nil)
 	end

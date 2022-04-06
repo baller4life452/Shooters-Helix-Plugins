@@ -1,4 +1,4 @@
-PLUGIN.title = "RPG Balance"
+PLUGIN.name = "RPG Balance"
 PLUGIN.author = "Shooter#5269"
 PLUGIN.description = "Have you ever wanted to give your players and RPG, but they keep using them irresponsible, unfair and/or overpowered skills? Well, this plugin will help you to balance your RPG."
 

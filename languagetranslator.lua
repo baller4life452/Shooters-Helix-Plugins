@@ -1,4 +1,4 @@
-PLUGIN.title = "Language Translator"
+PLUGIN.name = "Language Translator"
 PLUGIN.author = "Shooter#5269"
 PLUGIN.description = "Translates most Text chat into the reservers language (Allowing for players to cross the language barrior)."
 

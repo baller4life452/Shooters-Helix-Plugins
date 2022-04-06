@@ -1,20 +1,20 @@
-PLUGIN.title = "Door Blaster"
+PLUGIN.name = "Door Blaster"
 PLUGIN.author = "Shooter#5269"
 PLUGIN.description = "Implements the ability shoot locks off doors, shoot the hinges of the door, blast open the door entirely."
 
 ix.config.Add("Shot Distance", 3, "How close a shot has to be to a part of the door to destroy that part", nil, {
 	data = { min = 1, max = 10 },
-	category = "Door Blaster"
+	category = PLUGIN.name
 })
 
 ix.config.Add("Range", 150, "How close a person has to be to the door to shoot it open", nil, {
 	data = { min = 1, max = 300 },
-	category = "Door Blaster"
+	category = PLUGIN.name
 })
 
 ix.config.Add("Respawn Timer", 60, "How long it takes for the door to respawn", nil, {
 	data = { min = 1, max = 600 },
-	category = "Door Blaster"
+	category = PLUGIN.name
 })
 
 PLUGIN.blastableweapons = {

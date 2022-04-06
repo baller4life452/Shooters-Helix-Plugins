@@ -3,7 +3,7 @@ PLUGIN.author = "Shooter#5269"
 PLUGIN.description = "Implements a world based first person view with crosshair draw."
 
 ix.config.Add("First Person View", true, "Weather or not FPV is enabled.", nil, {
-	category = "True FPV"
+	category = PLUGIN.name
 })
 
 
